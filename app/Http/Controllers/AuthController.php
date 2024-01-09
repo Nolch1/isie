@@ -1,5 +1,6 @@
 <?php
 // app/Http/Controllers/AuthController.php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -9,7 +10,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 use App\Models\Vote;
-use App\Models\Votesnumber;
+use App\Models\Note;
 
 
 // Add the following use statement
@@ -91,6 +92,29 @@ public function addVotes(Request $request)
     Vote::create($votesData);
 
     return response()->json(['status' => 'success', 'message' => 'Votes added successfully']);
+}
+// app/Http/Controllers/AuthController.php
+
+public function addNotes(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'user_id' => 'required|exists:users,id',
+        'name' => 'required|string',
+        'notes' => 'required|integer',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json(['status' => 'error', 'errors' => $validator->errors()], 422);
+    }
+
+    // Store the notes in the database
+    Note::create([
+        'user_id' => $request->input('user_id'),
+        'name' => $request->input('name'),
+        'notes' => $request->input('notes'),
+    ]);
+
+    return response()->json(['status' => 'success', 'message' => 'Notes added successfully']);
 }
 
 

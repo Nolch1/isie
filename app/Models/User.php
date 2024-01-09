@@ -1,5 +1,4 @@
 <?php
-// app/Models/User.php
 
 namespace App\Models;
 
@@ -59,12 +58,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Selectedpeople::class);
     }
+
+    /**
+     * Get the notes associated with the user.
+     */
     public function notes()
     {
         return $this->hasMany(Note::class);
     }
-    /**
-     * Get the votesnumber associated with the user.
-     */
-   
 }

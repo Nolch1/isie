@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SelectedpeopleController;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -27,10 +28,8 @@ Route::post('/addVotes', [AuthController::class, 'addVotes']);
 Route::post('/selectedpeople/{user_id}', [SelectedpeopleController::class, 'addSelectedPerson']);
 Route::get('/selectedpeople/{user_id}', [SelectedpeopleController::class, 'getSelectedPeople']);
 
-Route::post('/add-note', 'AuthController@addNotes');
-// routes/api.php
+Route::post('/addNotes', [AuthController::class, 'addNotes']);
 
-Route::get('/user/{user_id}/notes', 'AuthController@userNotes');
 
 
 
